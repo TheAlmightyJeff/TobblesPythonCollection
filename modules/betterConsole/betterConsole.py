@@ -3,6 +3,8 @@
 #© 2025 - do not redistribute
 #----------------------------
 
+#Recent edits: improved spacing and added more adjustable screen sizes. not auto bc i dont know how :/
+
 from turtle import Screen, Turtle
 from time import sleep
 import re
@@ -22,8 +24,9 @@ turtle.penup()
 
 #change the default positions to adjust to your screen size.
 #this current setup is for 1080p (i think...)
-tYpos_default = 480
-tXpos_default = -960
+
+tYpos_default = 470
+tXpos_default = -950
 
 turtleYpos = tYpos_default
 
@@ -76,17 +79,26 @@ def write(text, speed=0.01):
             else:
                 sleep(speed)
 
-            if ch == "W":
+            if ch in ["W", "M"]:
                 spacing = 20
             elif ch.isupper() and next_ch != " ":
                 spacing = 14 if ch not in ["I"] else 6
-            elif ch in ["l", "t", "r", "f", "i", "j", "'"]:
+            elif ch in ["o"]:
+                spacing = 12
+            elif ch in ["r"]:
+                spacing = 8
+            elif ch in ["t", "f"]:
                 spacing = 7
+            elif ch in ["l", "i", "j", "'"]:
+                spacing = 4
             elif ch in ["w", "m"]:
-                spacing = 17
+                spacing = 16
             else:
                 spacing = 11
 
+            if current_style == "bold":
+                spacing = spacing + 1
+            
             turtle.forward(spacing)
 
     _, y = turtle.position()
@@ -109,6 +121,8 @@ def howto():
     print("----------------------------------------")
     print("Colours: @red-, @orange-, @yellow-, @green-, @blue-, @pink-, @purple-, @white-, @grey-.")
     print("styles: @bold-, @italic-, @underline-, @normal-.")
+    print("----------------------------------------")
+    print("More styles and colours can be added in the code under the 'COLOUR_MAP' and 'STYLE_MAP' at the top.")
     print("----------------------------------------")
     
 howto()
