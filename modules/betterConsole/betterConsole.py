@@ -14,7 +14,7 @@ import tkinter
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
 
-__all__ = ["write", "ask", "hold", "customise", "reset"]
+__all__ = ["write", "ask", "hold", "customise", "reset", "byebye"]
 
 _screen = Screen()
 _root = _screen._root
@@ -75,7 +75,6 @@ _turtle.speed(9999)
 
 _turtleYpos = _tYpos_default
 
-
 def write(text, speed=0.01):
     global _turtleYpos
     _turtle.setpos(_tXpos_default, _turtleYpos)
@@ -105,6 +104,8 @@ def write(text, speed=0.01):
                 sleep(0.5)
             else:
                 sleep(speed)
+                
+            x, _ = _turtle.position()
 
             if ch in ["W", "M"]:
                 spacing = 20
@@ -130,9 +131,7 @@ def write(text, speed=0.01):
             
             _turtle.forward(spacing)
 
-    _, y = _turtle.position()
-    _turtleYpos = y - 30
-
+    _newline()
 
 def ask(txt, speed=0.01):
     write(txt, speed)
@@ -146,8 +145,19 @@ def customise(bgCol=None, title=None):
     _screen.bgcolor(bgCol)
 
 def reset():
+    global _turtleYpos
     _turtle.clear()
     _turtleYpos = _tYpos_default
+    _turtle.setpos(_tXpos_default, _turtleYpos)
+
+def byebye():
+    _screen.bye()
+    exit()
+    
+def _newline():
+    global _turtleYpos
+    _, y = _turtle.position()
+    _turtleYpos = y - 30
     
     
 def howto():
@@ -165,9 +175,7 @@ def howto():
     print("More styles and colours can be added in the code under the 'COLOUR_MAP' and 'STYLE_MAP'.")
     print("----------------------------------------")
 
-
 howto()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
-_turtle.clear()
-_turtleYpos = _tYpos_default
+reset()
