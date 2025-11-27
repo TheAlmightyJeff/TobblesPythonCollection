@@ -4,7 +4,7 @@
 #----------------------------
 # Recent edits: more useful funcs, Better fullscreen mode, spacing better, code structure revamp and private varibles.
 #----------------------------
-#Edit these values if u want
+#Edit these, if u want
 #----------------------------
 
 screenTitle = "Better console - by tobble"
@@ -32,10 +32,11 @@ STYLE_MAP = {
     "normal": "normal"
 }
 
+_defaultPause = 0.5
+
 # ----------------------------------------------------------
 # DO NOT EDIT UNDER HERE UNLESS YOU KNOW WHAT YOUR DOING :)
 # ----------------------------------------------------------
-
 
 from turtle import Screen, Turtle
 from time import sleep
@@ -70,9 +71,9 @@ _tXpos_default = -_width // 2 + width_Padding
 _tYpos_default =  _height // 2 - Hight_Padding
 
 _turtle = Turtle()
-_turtle.hideturtle()
+#_turtle.hideturtle()
 _turtle.penup()
-_turtle.speed(9999)
+_turtle.speed(0)
 
 _turtleYpos = _tYpos_default
 
@@ -100,12 +101,13 @@ def write(text, speed=0.01):
             ch = part[i]
             next_ch = part[i+1] if i + 1 < len(part) else ""
             _turtle.write(ch, font=('Arial', 16, current_style))
-
+            
             if ch in [".", "!"]:
                 sleep(0.5)
             else:
                 sleep(speed)
 
+            # spacing calculations
             if ch in ["W", "M"]:
                 spacing = 20
             elif ch.isupper() and next_ch != " ":
@@ -133,6 +135,7 @@ def write(text, speed=0.01):
             if _turtle.xcor() > (_width // 2 - width_Padding):
                 _newline()
 
+    sleep(_defaultPause)
     _newline()
 
 def ask(txt, speed=0.01):
@@ -142,7 +145,7 @@ def ask(txt, speed=0.01):
 def hold():
     _screen.mainloop()
 
-def customise(bgCol=None, title=None):
+def customise(bgCol=None, title=None, pauseAfterWrite=None):
     if bgCol == None:
         pass
     else:
@@ -151,6 +154,10 @@ def customise(bgCol=None, title=None):
         pass
     else:
         _screen.title(title)
+    if pauseAfterWrite == None:
+        pass
+    else:
+        _defaultPause = pauseAfterWrite
 
 def reset():
     global _turtleYpos
