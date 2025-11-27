@@ -16,7 +16,7 @@ sends a message box to be used as an input. e.g var = ask(...)
 
 customise(bgCol="colour", title="window title", pauseAfterWrite="speed")
 
-cutomises the window. colour can take a name or a hex value. pauseAfterWrite is how long betterConsole will wait before continuing with the next line of text.
+cutomises the window. colour can take a name or a hex value. pauseAfterWrite is how long betterConsole will wait before continuing with the next line of text.  takes time in seconds.
 
 hold()
 
