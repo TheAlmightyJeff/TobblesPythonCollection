@@ -141,8 +141,15 @@ def hold():
     _screen.mainloop()
 
 def customise(bgCol=None, title=None):
-    _screen.title(title)
-    _screen.bgcolor(bgCol)
+    if bgCol == None:
+        pass
+    else:
+        _screen.bgcolor(bgCol)
+
+    if title == None:
+        pass
+    else:
+        _screen.title(title)
 
 def reset():
     global _turtleYpos
@@ -179,3 +186,4 @@ howto()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
 reset()
+
