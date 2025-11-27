@@ -1,4 +1,4 @@
-# Tobbles Python Collection<img src="https://github.com/TheAlmightyJeff/TobblesPython/blob/main/Python-logo.png?raw=true" width="32">
+# Tobbles Python Collection<img src="https://github.com/TheAlmightyJeff/TobblesPython/blob/main/Python-logo.png?raw=true" width="30">
 A collection of all mine and some friends python stuff - please dont change and redistribute as your own!
 
 ## Better console
