@@ -22,6 +22,10 @@ hold()
 
 prevents the screen from closing after everything else has finished running. you dont always need it for some reason.
 
+byebye()
+
+exits better console.
+
 ---
 
 ### Styles:
