@@ -1,0 +1,42 @@
+[Arial]
+default = 11
+caps = 14
+newline = 30
+
+[Arial.override]
+W = 20
+M = 20
+I = 6
+o = 12
+r = 8
+t = 7
+f = 7
+l = 5
+i = 5
+j = 5
+"'" = 5
+w = 16
+m = 16
+"@" = 20
+
+["Comic Sans MS"]
+default = 11
+caps = 13
+newline = 30
+
+["Comic Sans MS".override]
+W = 20
+M = 20
+I = 12
+P = 11
+o = 12
+r = 9
+t = 8
+f = 8
+l = 5
+i = 5
+j = 5
+"'" = 5
+w = 16
+m = 16
+"@" = 20

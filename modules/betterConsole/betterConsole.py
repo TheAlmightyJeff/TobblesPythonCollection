@@ -49,6 +49,9 @@ import tkinter
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
 
+import tomllib
+import os
+
 __all__ = ["write", "ask", "hold", "customise", "reset", "byebye", "wait"]
 
 _screen = Screen()
@@ -80,6 +83,14 @@ _turtle.speed(0)
 
 _turtleYpos = _tYpos_default
 
+def load_font_rules():
+    path = os.path.join(os.path.dirname(__file__), "font_rules.toml")
+    with open(path, "rb") as f:
+        return tomllib.load(f)
+
+FONT_RULES = load_font_rules()
+_currentFont = "Arial"
+
 def write(text, speed=0.01):
     global _turtleYpos
     _turtle.setpos(_tXpos_default, _turtleYpos)
@@ -103,36 +114,28 @@ def write(text, speed=0.01):
         for i in range(len(part)):
             ch = part[i]
             next_ch = part[i+1] if i + 1 < len(part) else ""
-            _turtle.write(ch, font=('Arial', 16, current_style))
+            _turtle.write(ch, font=(_currentFont, 16, current_style))
             
             if ch in [".", "!"]:
                 sleep(0.5)
             else:
                 sleep(speed)
 
-            # spacing calculations
-            if ch in ["W", "M"]:
-                spacing = 20
-            elif ch.isupper() and next_ch != " ":
-                spacing = 14 if ch not in ["I"] else 6
-            elif ch in ["o"]:
-                spacing = 12
-            elif ch in ["r"]:
-                spacing = 8
-            elif ch in ["t", "f"]:
-                spacing = 7
-            elif ch in ["l", "i", "j", "'"]:
-                spacing = 5
-            elif ch in ["w", "m"]:
-                spacing = 16
-            elif ch in ["@"]:
-                spacing = 20
+            rules = FONT_RULES.get(_currentFont, {})
+            default_spacing = rules.get("default", 11)
+            caps_spacing = rules.get("caps")
+            overrides = rules.get("override", {})
+
+            if ch in overrides:
+                spacing = overrides[ch]
+            elif ch.isupper() and caps_spacing is not None:
+                spacing = caps_spacing
             else:
-                spacing = 11
+                spacing = default_spacing
 
             if current_style == "bold":
                 spacing += 1
-            
+                        
             _turtle.forward(spacing)
 
             if _turtle.xcor() > (_width // 2 - width_Padding):
@@ -148,7 +151,8 @@ def ask(txt, speed=0.01):
 def hold():
     _screen.mainloop()
 
-def customise(bgCol=None, title=None, pauseAfterWrite=None):
+def customise(bgCol=None, title=None, pauseAfterWrite=None, font=None):
+    global _currentFont, _defaultPause, FONT_RULES  # <-- add this
     if bgCol == None:
         pass
     else:
@@ -161,6 +165,11 @@ def customise(bgCol=None, title=None, pauseAfterWrite=None):
         pass
     else:
         _defaultPause = pauseAfterWrite
+    if font == None:
+        pass
+    else:
+        FONT_RULES = load_font_rules()
+        _currentFont = font
 
 def reset():
     global _turtleYpos
@@ -187,8 +196,12 @@ def wait():
         
 def _newline():
     global _turtleYpos
+
+    rules = FONT_RULES.get(_currentFont, {})
+    newline_spacing = rules.get("newline", 30)
+
     _, y = _turtle.position()
-    _turtleYpos = y - 30
+    _turtleYpos = y - newline_spacing
     _turtle.setpos(_tXpos_default, _turtleYpos)
 
 def _howto():
