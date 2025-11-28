@@ -3,6 +3,7 @@ import betterConsole as bc
 bc.customise(title="better Console DEMO!")
 
 bc.write("@instantOn-@test-@green-Welcome... To @instantOff-@yellow-better console!", 0.01)
+bc.wait()
 bc.write("@green-Better console is a module developed by @yellow-@bold-tobble.")
 bc.write("@green-It is turtle based and can be used in the same way the normal console can just with more @italic-@orange-customisation!")
 ask1 = bc.ask("@yellow-it can take inputs...")

@@ -49,7 +49,7 @@ import tkinter
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
 
-__all__ = ["write", "ask", "hold", "customise", "reset", "byebye"]
+__all__ = ["write", "ask", "hold", "customise", "reset", "byebye", "wait"]
 
 _screen = Screen()
 _root = _screen._root
@@ -172,8 +172,8 @@ def byebye():
     _screen.bye()
     exit()
 
-def waitEnter():
-    write("@grey-Click enter to continue")
+def wait():
+    write("@grey-Click enter to continue", 0)
     done = False
     def _pressed():
         nonlocal done

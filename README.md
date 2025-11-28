@@ -30,9 +30,9 @@ byebye()
 
 exits better console.
 
-waitEnter()
+wait()
 
-waits for an enter key input.
+Pauses untill it detects an enter key input.
 
 ---
 
