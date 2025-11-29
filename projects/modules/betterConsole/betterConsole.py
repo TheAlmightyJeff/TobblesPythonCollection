@@ -101,15 +101,25 @@ def write(text, speed=0.01):
     parts = re.split(r'(@\w+-)', text)
 
     for part in parts:
-        match = re.match(r'@(\w+)-', part)
+        match = re.match(r'@([#\w]+)-', part)
         if match:
-            code = match.group(1).lower()
-            if code in COLOR_MAP:
-                current_color = COLOR_MAP[code]
+            code = match.group(1)
+
+            if code.startswith("#") and re.fullmatch(r"#[0-9A-Fa-f]{6}", code):
+                current_color = code
                 _turtle.color(current_color)
-            elif code in STYLE_MAP:
-                current_style = STYLE_MAP[code]
-            continue
+                continue
+
+            code_lower = code.lower()
+
+            if code_lower in COLOR_MAP:
+                current_color = COLOR_MAP[code_lower]
+                _turtle.color(current_color)
+                continue
+
+            if code_lower in STYLE_MAP:
+                current_style = STYLE_MAP[code_lower]
+                continue
 
         for i in range(len(part)):
             ch = part[i]
@@ -187,7 +197,6 @@ def wait():
     def _pressed():
         nonlocal done
         done = True
-
     _screen.onkey(_pressed, "Return")
     _screen.listen()
 
