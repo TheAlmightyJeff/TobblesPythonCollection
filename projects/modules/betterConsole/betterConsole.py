@@ -49,7 +49,15 @@ import tkinter
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
 
-import tomllib
+_TOMLLIB_WORKS = True
+
+try:
+    import tomllib
+except ImportError:
+    print("TOMLLIB NOT FOUND, FALLING BACK TO DEFAULT FONT. FONT CHANGES WILL NOT WORK.")
+    _TOMLLIB_WORKS = False
+
+
 import os
 
 __all__ = ["write", "ask", "hold", "customise", "reset", "byebye", "wait"]
