@@ -49,7 +49,7 @@ import tkinter
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
 
-_TOMLLIB_WORKS = True
+_TOMLLIB = True
 
 try:
     import tomllib
@@ -156,28 +156,28 @@ def write(text, speed=0.01):
                 if current_style == "bold":
                     spacing += 1
                     
-                else: #FALLBACK IF TOMLLIB NOT FOUND
-                    if ch in ["W", "M"]:
-                        spacing = 20
-                    elif ch.isupper() and next_ch != " ":
-                        spacing = 14 if ch not in ["I"] else 6
-                    elif ch in ["o"]:
-                        spacing = 12
-                    elif ch in ["r"]:
-                        spacing = 8
-                    elif ch in ["t", "f"]:
-                        spacing = 7
-                    elif ch in ["l", "i", "j", "'"]:
-                        spacing = 5
-                    elif ch in ["w", "m"]:
-                        spacing = 16
-                    elif ch in ["@"]:
-                        spacing = 20
-                    else:
-                        spacing = 11
+            else: #FALLBACK IF TOMLLIB NOT FOUND
+                if ch in ["W", "M"]:
+                    spacing = 20
+                elif ch.isupper() and next_ch != " ":
+                    spacing = 14 if ch not in ["I"] else 6
+                elif ch in ["o"]:
+                    spacing = 12
+                elif ch in ["r"]:
+                    spacing = 8
+                elif ch in ["t", "f"]:
+                    spacing = 7
+                elif ch in ["l", "i", "j", "'"]:
+                    spacing = 5
+                elif ch in ["w", "m"]:
+                    spacing = 16
+                elif ch in ["@"]:
+                    spacing = 20
+                else:
+                    spacing = 11
 
-                    if current_style == "bold":
-                        spacing += 1
+                if current_style == "bold":
+                    spacing += 1
 
             if _turtle.xcor() > (_width // 2 - width_Padding):
                 _newline()
@@ -271,4 +271,3 @@ _howto()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
 reset()
-
