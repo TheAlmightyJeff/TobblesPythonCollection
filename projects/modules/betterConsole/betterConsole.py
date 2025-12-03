@@ -131,6 +131,7 @@ def write(text, speed=0.01):
                 continue
 
         for i in range(len(part)):
+            global _TOMLLIB
             ch = part[i]
             next_ch = part[i+1] if i + 1 < len(part) else ""
             _turtle.write(ch, font=(_currentFont, 16, current_style))
@@ -181,7 +182,8 @@ def write(text, speed=0.01):
 
             if _turtle.xcor() > (_width // 2 - width_Padding):
                 _newline()
-        _turtle.forward(spacing)
+                
+            _turtle.forward(spacing)
                     
 
     sleep(_defaultPause)
@@ -210,7 +212,9 @@ def customise(bgCol=None, title=None, pauseAfterWrite=None, font=None):
         _defaultPause = pauseAfterWrite
     if font == None:
         pass
-    elif TOMLLIB == True:
+    if _TOMLLIB == False:
+        print("TOMLLIB NOT FOUND, FALLING BACK TO DEFAULT FONT. FONT CHANGES WILL NOT WORK.")
+    elif _TOMLLIB == True:
         FONT_RULES = load_font_rules()
         _currentFont = font
 
