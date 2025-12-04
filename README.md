@@ -28,9 +28,9 @@ hold()
 
 prevents the screen from closing after everything else has finished running. you dont always need it for some reason.
 
-reset()
+clear()
 
-resets the console.
+clears the console.
 
 byebye()
 
