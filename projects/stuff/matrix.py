@@ -22,4 +22,5 @@ if pswd != "1234":
     bc.write("@red-@bold-@underlined-!NO!")
     bc.byebye()
 
-bc.write("@green-@bold-@underlined-Welcome To The Matrix")
+bc.reset()
+bc.write("@green-@bold-Welcome To The Matrix")
