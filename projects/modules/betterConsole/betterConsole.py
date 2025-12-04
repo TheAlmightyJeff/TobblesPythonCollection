@@ -2,7 +2,7 @@
 # Better Console
 # © 2025 - do not redistribute
 #----------------------------
-_LOCAL_VERSION = "2.6"
+_LOCAL_VERSION = "2.6" # dont edit this :)
 #----------------------------
 #Edit these, if u want
 #----------------------------
@@ -49,7 +49,13 @@ import tkinter
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
 
-import urllib.request
+_VERSION_FETCHED = True
+
+try:
+    import urllib.request
+except ImportError:
+    print("COULD NOT FETCH VERSION FROM GITHUB.")
+    _VERSION_FETCHED = False
 
 import os
 
@@ -303,7 +309,10 @@ def _howto():
     print("----------------------------------------")
 
 _howto()
-_verify_version()
+
+if _VERSION_FETCHED == True:
+    _verify_version()
+
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
 clear()
