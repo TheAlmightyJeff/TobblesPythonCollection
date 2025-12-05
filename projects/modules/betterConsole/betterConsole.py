@@ -44,12 +44,14 @@ from time import sleep
 import re
 
 import sys
+import os
 
 import tkinter
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
 
 _VERSION_FETCHED = True
+_TOMLLIB = True
 
 try:
     import urllib.request
@@ -57,16 +59,13 @@ except ImportError:
     print("COULD NOT FETCH VERSION FROM GITHUB.")
     _VERSION_FETCHED = False
 
-import os
-
-_TOMLLIB = True
-
 try:
     import tomllib
 except ImportError:
     print("TOMLLIB NOT FOUND, FALLING BACK TO DEFAULT FONT. FONT CHANGES WILL NOT WORK.")
     _TOMLLIB = False
 
+#-----------------------------------------------------------
 
 __all__ = ["write", "ask", "hold", "customise", "reset", "byebye", "wait"]
 
@@ -135,7 +134,7 @@ def write(text, speed=0.01):
     current_style = "normal"
     _turtle.color(current_color)
 
-    parts = re.split(r'(@\w+-)', text)
+    parts = re.split(r'(@(?:#[0-9A-Fa-f]{6}|\w+)-)', text)
 
     for part in parts:
         match = re.match(r'@([#\w]+)-', part)
