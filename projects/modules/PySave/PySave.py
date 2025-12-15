@@ -120,6 +120,7 @@ def readData(varName):
 
 
 def delData(varName):
+    
     """Delete encrypted variable name and value. CANNOT BE UNDONE."""
 
     key = _enc(varName)
@@ -149,3 +150,5 @@ def delData(varName):
 
 
 _Createfile()
+writeData("hello", "1234567890")
+print(readData("hello"))
