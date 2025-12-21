@@ -79,6 +79,17 @@ def commands(text_input):
         if cmd_name in USAGE:
             write(f"Usage: {USAGE[cmd_name]}")
 
+#---------------------
+# file system helpers
+#---------------------
+def createDir(directory):
+    global current_dir
+    path = f"./{current_dir}/{directory}"
+    write(f"creating at {path}")
+    os.mkdir(path)
+
+def createRoot():
+    os.mkdir("./root")
 # --------------------
 # commands
 # --------------------
@@ -96,9 +107,12 @@ def cmd_run(program):
 def cmd_dir(action, param):
     global current_dir
     if action == "in":
-        current_dir = param
+        if os.path.isdir(param):
+            current_dir = param
+        else:
+            write("Error: dir doesnt exist.")
     elif action == "create":
-        write(f"Directory '{param}' created (test doesnt do anything!).")
+        createDir(param)
 
 def cmd_clr():
     clear()
@@ -152,6 +166,11 @@ write("Tiny DoS by Tobble - Copyright 2025")
 write("Type 'help' for help")
 write("")
 show_prompt()
+
+try:
+    createRoot()
+except:
+    pass
 
 # --------------------
 # start
