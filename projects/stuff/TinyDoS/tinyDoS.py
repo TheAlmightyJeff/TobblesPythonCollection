@@ -1,3 +1,8 @@
+#----------------------------
+# TinyDos
+# © 2026 - do not redistribute
+#----------------------------
+
 import tkinter as tk
 import os
 
